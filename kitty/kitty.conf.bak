@@ -2023,7 +2023,7 @@ active_tab_title_template "{fmt.fg._fff}{title}"
 
 
 # BEGIN_KITTY_THEME
-# graphite
+# Base2Tone Space Dark
 include current-theme.conf
 # END_KITTY_THEME
 
