@@ -5,13 +5,8 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-
   -- disable trouble
   { "folke/trouble.nvim", enabled = false },
-
-  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  { import = "lazyvim.plugins.extras.lang.typescript" },
 
   -- add more treesitter parsers
   {
@@ -53,9 +48,6 @@ return {
     end,
   },
 
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
-
   -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
@@ -82,7 +74,34 @@ return {
       require("csharp").setup()
     end,
   },
-
+  { "AndreM222/copilot-lualine" },
+  {
+    "giuxtaposition/blink-cmp-copilot",
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = false,
+          auto_trigger = true,
+          hide_during_completion = true,
+          debounce = 75,
+          keymap = {
+            accept = "<M-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        copilot_model = "gpt-4o-copilot",
+      })
+    end,
+  },
   {
     "echasnovski/mini.surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -107,34 +126,14 @@ return {
   { "nyoom-engineering/oxocarbon.nvim" },
   { "sainnhe/gruvbox-material" },
   { "whatyouhide/vim-gotham" },
+  { "shaunsingh/nord.nvim" },
+  { "shortcuts/no-neck-pain.nvim", version = "*" },
   -- Lua
-  {
-    "folke/zen-mode.nvim",
-    opts = {
-      window = {
-        backdrop = 0.95,
-        width = 0.85,
-        height = 1,
-        options = {
-          signcolumn = "no",
-          number = false,
-          relativenumber = false,
-          cursorline = false,
-          cursorcolumn = false,
-          foldcolumn = "0",
-        },
-      },
-    },
-    config = function(_, opts)
-      require("zen-mode").setup(opts)
-    end,
-  },
   {
     "akinsho/toggleterm.nvim",
     version = "*",
     opts = {
-      direction = "vertical",
-      size = 55,
+      direction = "horizontal",
       -- float_opts = {
       --   border = "curved",
       -- },
@@ -170,7 +169,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gotham",
+      colorscheme = "nord",
     },
   },
 }
